@@ -1,256 +1,126 @@
-"use client";
-import { useState, useEffect, useRef } from "react";
-import { gsap } from "gsap";
+  "use client";
+  import { useState, useEffect, useRef } from "react";
+  import { gsap } from "gsap";
 
-const ShopByCategory = () => {
-  const [activeCategory, setActiveCategory] = useState("Nutra Supplements");
-  const sliderRef = useRef(null);
+  const ShopByCategory = () => {
+    const [activeCategory, setActiveCategory] = useState("Nutra Supplements");
+    const [categories, setCategories] = useState([]);
 
-  const categories = [
-    {
-      name: "Nutra Supplements",
-      icon: "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-    },
-    {
-      name: "Personal Care",
-      icon: "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-    },
-    {
-      name: "Herbal",
-      icon: "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-    },
-    {
-      name: "Dr. Vet",
-      icon: "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-    },
-    {
-      name: "Mother & Child Care",
-      icon: "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-    },
-    {
-      name: "Combo",
-      icon: "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-    },
-  ];
-  const products = {
-    "Nutra Supplements": [
-      {
-        name: "DERM EASE Mark Less Cream",
-        price: 112,
-        originalPrice: 139,
-        image:
-          "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-      },
-      {
-        name: "YAXON CARTHEAL SHOT Syrup",
-        price: 85,
-        originalPrice: 95,
-        image: "/assets/images/product2.png",
-      },
-      {
-        name: "DERM EASE Mark Less Cream",
-        price: 112,
-        originalPrice: 139,
-        image:
-          "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-      },
-      {
-        name: "YAXON CARTHEAL SHOT Syrup",
-        price: 85,
-        originalPrice: 95,
-        image: "/assets/images/product2.png",
-      },
-      {
-        name: "DERM EASE Mark Less Cream",
-        price: 112,
-        originalPrice: 139,
-        image:
-          "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-      },
-      {
-        name: "YAXON CARTHEAL SHOT Syrup",
-        price: 85,
-        originalPrice: 95,
-        image: "/assets/images/product2.png",
-      },
-      {
-        name: "DERM EASE Mark Less Cream",
-        price: 112,
-        originalPrice: 139,
-        image:
-          "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-      },
-      {
-        name: "YAXON CARTHEAL SHOT Syrup",
-        price: 85,
-        originalPrice: 95,
-        image: "/assets/images/product2.png",
-      },
-      {
-        name: "DERM EASE Mark Less Cream",
-        price: 112,
-        originalPrice: 139,
-        image:
-          "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-      },
-      {
-        name: "YAXON CARTHEAL SHOT Syrup",
-        price: 85,
-        originalPrice: 95,
-        image: "/assets/images/product2.png",
-      },
-      {
-        name: "DERM EASE Mark Less Cream",
-        price: 112,
-        originalPrice: 139,
-        image:
-          "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-      },
-      {
-        name: "YAXON CARTHEAL SHOT Syrup",
-        price: 85,
-        originalPrice: 95,
-        image: "/assets/images/product2.png",
-      },
-      {
-        name: "DERM EASE Mark Less Cream",
-        price: 112,
-        originalPrice: 139,
-        image:
-          "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-      },
-      {
-        name: "YAXON CARTHEAL SHOT Syrup",
-        price: 85,
-        originalPrice: 95,
-        image: "/assets/images/product2.png",
-      },
-      {
-        name: "DERM EASE Mark Less Cream",
-        price: 112,
-        originalPrice: 139,
-        image:
-          "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-      },
-      {
-        name: "YAXON CARTHEAL SHOT Syrup",
-        price: 85,
-        originalPrice: 95,
-        image: "/assets/images/product2.png",
-      },
-      {
-        name: "DERM EASE Mark Less Cream",
-        price: 112,
-        originalPrice: 139,
-        image:
-          "https://yaxoncare.com/uploads/category/1614759533_nutraceuticals.png",
-      },
-      {
-        name: "YAXON CARTHEAL SHOT Syrup",
-        price: 85,
-        originalPrice: 95,
-        image: "/assets/images/product2.png",
-      },
-    ],
-    "Personal Care": [
-      {
-        name: "YAXON VITAXON Drops",
-        price: 50,
-        originalPrice: 58,
-        image: "/assets/images/product3.png",
-      },
-      {
-        name: "YAXON YAXOFER XT Drops",
-        price: 50,
-        originalPrice: 55,
-        image: "/assets/images/product4.png",
-      },
-    ],
-    // Add more categories with products here
-  };
+    const [products, setProducts] = useState({});
 
-  useEffect(() => {
-    if (sliderRef.current) {
-      // GSAP Animation for the slider
-      gsap.fromTo(
-        sliderRef.current.children,
-        { opacity: 0, x: 50 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.5,
-          stagger: 0.1,
-          ease: "power3.out",
-        }
-      );
-    }
-  }, [activeCategory]);
+    const sliderRef = useRef(null);
+    useEffect(() => {
+      fetch("/data.json")
+        .then((response) => response.json())
+        .then((data) => {
+          setCategories(data.categories);
+          setProducts(data.products);
+          setActiveCategory(data.categories[0].name); // Set default category
+        })
+        .catch((error) => console.error("Error loading data:", error));
+    }, []);
 
-  return (
-    <div className="bg-gray-100 py-8 ">
-      {/* Categories */}
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-6">
-          Shop by Categories
-        </h2>
+    useEffect(() => {
+      if (sliderRef.current) {
+        gsap.fromTo(
+          sliderRef.current.children,
+          { opacity: 0, x: 50 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power3.out",
+          }
+        );
+      }
+    }, [activeCategory]);
+
+    // Scroll control functions
+    const scrollLeft = () => {
+      gsap.to(sliderRef.current, { x: "+=300", duration: 0.5 });
+    };
+
+    const scrollRight = () => {
+      gsap.to(sliderRef.current, { x: "-=300", duration: 0.5 });
+    };
+
+    return (
+      <div className="bg-gray-100 py-8">
+        {/* Categories */}
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-4">
+          <h2 className="text-3xl font-bold text-center mb-6">
+            Shop by Categories
+          </h2>
+          <div className="overflow-x-auto flex justify-center flex gap-4 py-2 px-2 scrollbar-hide">
             {categories.map((category) => (
               <button
                 key={category.name}
-                className={`flex items-center space-x-2 px-4 py-3 text-sm font-medium rounded-lg shadow-md nav-item ${
+                className={`flex items-center space-x-2 px-4 py-2 text-sm font-medium rounded-lg shadow-md ${
                   activeCategory === category.name
-                    ? "bg-green-500 text-white"
-                    : "bg-white border border-gray-300"
-                } transition hover:bg-green-500 hover:text-white`}
+                    ? "bg-[#f59f8b] border border-[#e58674] text-white"
+                    : "bg-white text-[#70292f]"
+                } transition hover:bg-[#e58674] hover:text-white whitespace-nowrap`}
                 onClick={() => setActiveCategory(category.name)}
               >
-                {/* Icon */}
-                <img
-                  src={category.icon}
+                {/* <img
+                  src="https://cdn-icons-png.flaticon.com/512/6177/6177173.png"
                   alt={category.name}
                   className="w-6 h-6"
-                />
-                {/* Category Name */}
+                /> */}
                 <span>{category.name}</span>
               </button>
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Products Slider */}
-      <div className="container mx-auto px-4 ">
-        <div
-          ref={sliderRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {products[activeCategory]?.map((product, index) => (
+        {/* Products Slider */}
+        <div className="container mx-auto px-4 mt-6 relative">
+          {/* Slider Controls */}
+          <button
+            onClick={scrollLeft}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-lg z-10 hidden md:block"
+          >
+            ◀
+          </button>
+
+          <div className="overflow-x-auto flex justify-center gap-6 py-4 scrollbar-hide">
             <div
-              key={index}
-              className="bg-white shadow rounded-lg p-4 text-center"
+              ref={sliderRef}
+              className="flex justify-center gap-6 transition-transform duration-500 ease-in-out"
             >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-40 object-contain mb-4"
-              />
-              <h3 className="text-lg font-semibold">{product.name}</h3>
-              <div className="text-green-600 font-bold text-lg">
-                Rs. {product.price}{" "}
-                <span className="line-through text-gray-500 text-sm">
-                  Rs. {product.originalPrice}
-                </span>
-              </div>
-              <button className="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg text-sm hover:bg-green-600">
-                View Details
-              </button>
+              {products[activeCategory]?.map((product, index) => (
+                <div
+                  key={index}
+                  className="bg-white shadow-lg rounded-lg p-4 text-center border-2 border-[#70292f] rounded-[3px_50px] shadow-[1px_1px_4px_#e58674] w-[250px] md:w-[300px] flex-shrink-0"
+                >
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-40 object-contain mb-4"
+                  />
+                  <h3 className="text-lg font-semibold">{product.name}</h3>
+                  <div className="text-gray-500 font-bold text-lg">
+                    Rs. {product.price}
+                  </div>
+                  <button className="mt-4 px-4 py-2 bg-[#f59f8b] text-white rounded-lg text-sm hover:bg-[#e58674]">
+                    View Details
+                  </button>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Right Scroll Button */}
+          <button
+            onClick={scrollRight}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-lg z-10 hidden md:block"
+          >
+            ▶
+          </button>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
-export default ShopByCategory;
+  export default ShopByCategory;
