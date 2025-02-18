@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    
-pageExtensions: ['page.js', 'page.jsx'],
+  reactStrictMode: true,
+  swcMinify: true,
+  pageExtensions: ['js', 'jsx'], // Uncommented
 };
-
 
 export default nextConfig;
