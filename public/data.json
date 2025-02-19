@@ -25,7 +25,31 @@
         "price": 85,
         "originalPrice": 95,
         "image": "/assets/caretex-products/Cervical_Aids/Hard_Cervical_Collar.png"
-      }
+      },
+      {
+        "name": "Head Holder",
+        "price": 85,
+        "originalPrice": 95,
+        "image": "/assets/caretex-products/Cervical_Aids/Head_Holder.png"
+      },
+      {
+        "name": "Philadelphia Collar",
+        "price": 85,
+        "originalPrice": 95,
+        "image": "/assets/caretex-products/Cervical_Aids/Philadelphia_Collar.png"
+      },
+       {
+         "name": "Sof Cervical Collar Deluxe",
+         "price": 85,
+         "originalPrice": 95,
+         "image": "/assets/caretex-products/Cervical_Aids/Sof_Cervical_Collar_Deluxe.png"
+       },
+        {
+          "name": "Soft Cervical Collar Pedia",
+          "price": 85,
+          "originalPrice": 95,
+          "image": "/assets/caretex-products/Cervical_Aids/Soft_Cervical_Collar_Pedia.png"
+        }
     ],
     "Rahablitation & Mobility": [
       {
