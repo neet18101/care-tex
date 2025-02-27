@@ -1,8 +1,11 @@
 "use client";
+import RightArrow from "@/app/assets/RightArrow";
 import { useEffect, useState } from "react";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +18,15 @@ function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    fetch("/productData.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setCategories(data.categories);
+      })
+      .catch((error) => console.error("Error loading data:", error));
   }, []);
 
   return (
@@ -108,16 +120,42 @@ function Navbar() {
                     />
                   </svg>
                 </a>
-                <ul className="z-10 absolute left-0 w-[200px] mt-2 bg-white text-black rounded shadow-lg opacity-0 invisible translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
-                  <li className="px-4 py-2 hover:bg-[#f59f8b] hover:text-[#fff]">
-                    <a href="/shop/new-arrivals/male">New Arrivals</a>
-                  </li>
-                  <li className="px-4 py-2 hover:bg-[#f59f8b] hover:text-[#fff]">
-                    <a href="/shop/trending-products/male">Trending Products</a>
-                  </li>
-                  <li className="px-4 py-2 hover:bg-[#f59f8b] hover:text-[#fff]">
-                    <a href="/shop/best-seller/male">Best Seller</a>
-                  </li>
+                <ul className="z-10 absolute left-0 w-[250px] mt-2 bg-white text-black rounded shadow-lg opacity-0 invisible translate-y-3 transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
+                  {categories.map((category, index) => (
+                    <li
+                      key={index}
+                      className="relative group px-4 py-2 hover:bg-[#f59f8b] hover:text-[#fff]"
+                    >
+                      <button
+                        className="w-full text-left flex justify-between items-center"
+                        onMouseEnter={() => setActiveCategory(category.name)}
+                      >
+                        {category.name}
+                        <RightArrow width={20} height={20} />
+                      </button>
+                      {/* Subcategory Dropdown */}
+                      {activeCategory === category.name && (
+                        <ul className="absolute left-full top-0 w-[200px] bg-white text-black rounded shadow-lg transition-all duration-300">
+                          {category.subcategories.map((sub, i) => (
+                            <li
+                              key={i}
+                              className="px-4 py-2 hover:bg-[#f59f8b] hover:text-[#fff]"
+                            >
+                              <a
+                                href={`/${String(category.name)
+                                  .toLowerCase()
+                                  .replace(/\s+/g, "-")}/${String(sub)
+                                  .toLowerCase()
+                                  .replace(/\s+/g, "-")}`}
+                              >
+                                {sub}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
+                  ))}
                 </ul>
               </li>
               <li>

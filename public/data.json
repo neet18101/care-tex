@@ -38,18 +38,24 @@
         "originalPrice": 95,
         "image": "/assets/caretex-products/Cervical_Aids/Philadelphia_Collar.png"
       },
-       {
-         "name": "Sof Cervical Collar Deluxe",
-         "price": 85,
-         "originalPrice": 95,
-         "image": "/assets/caretex-products/Cervical_Aids/Sof_Cervical_Collar_Deluxe.png"
-       },
-        {
-          "name": "Soft Cervical Collar Pedia",
-          "price": 85,
-          "originalPrice": 95,
-          "image": "/assets/caretex-products/Cervical_Aids/Soft_Cervical_Collar_Pedia.png"
-        }
+      {
+        "name": "Sof Cervical Collar Deluxe",
+        "price": 85,
+        "originalPrice": 95,
+        "image": "/assets/caretex-products/Cervical_Aids/Sof_Cervical_Collar_Deluxe.png"
+      },
+      {
+        "name": "Soft Cervical Collar Pedia",
+        "price": 85,
+        "originalPrice": 95,
+        "image": "/assets/caretex-products/Cervical_Aids/Soft_Cervical_Collar_Pedia.png"
+      },
+      {
+        "name": "Softy Cervical Collar Special",
+        "price": 85,
+        "originalPrice": 95,
+        "image": "/assets/caretex-products/Cervical_Aids/Softy_Cervical_Collar_Special.png"
+      }
     ],
     "Rahablitation & Mobility": [
       {

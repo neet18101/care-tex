@@ -6,6 +6,7 @@ import { gsap } from "gsap";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Image from "next/image";
 
 const ShopByCategory = () => {
   const [activeCategory, setActiveCategory] = useState("Nutra Supplements");
@@ -71,14 +72,16 @@ const ShopByCategory = () => {
           ref={sliderRef}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-5"
         >
-          {products[activeCategory]?.slice(0, 6)?.map((product, index) => (
+          {products[activeCategory]?.slice(0, 8)?.map((product, index) => (
             <div
               key={index}
               className="bg-white shadow-lg rounded-lg p-4 text-center border-2 border-[#70292f] rounded-[3px_50px] shadow-[1px_1px_4px_#e58674] w-[250px] md:w-[300px]"
             >
-              <img
+              <Image
                 src={product.image}
                 alt={product.name}
+                width={500}
+                height={500}
                 className="w-full h-40 object-contain mb-4"
               />
               <h3 className="text-lg font-semibold">{product.name}</h3>

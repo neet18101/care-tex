@@ -30,9 +30,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${mulish.variable} antialiased`}>
-        <Navbar />
+        {/* <Navbar /> */}
         {children}
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );
